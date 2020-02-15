@@ -26,5 +26,14 @@
       "error",
       "as-needed"
     ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
   }
 }
