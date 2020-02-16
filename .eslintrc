@@ -19,12 +19,20 @@
           ".js",
           ".jsx"
         ]
-      }
+      },
     ],
     "react/jsx-one-expression-per-line": "off",
     "arrow-body-style": [
       "error",
       "as-needed"
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.stories.js"
+        ]
+      }
     ]
   },
   "settings": {
