@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Quicksand", sans-serif;
     font-size: 1.6rem;
+    color: hsl(0, 0%, 15%);
   }
 `;
 
