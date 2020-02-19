@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import Button from 'components/organisms/Button';
+import Button from 'components/atoms/Button';
 import GlobalStyle from 'theme/GlobalStyle';
 import theme from 'theme/mainTheme';
 
