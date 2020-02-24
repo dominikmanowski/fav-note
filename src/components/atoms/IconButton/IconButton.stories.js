@@ -9,14 +9,14 @@ import twitterIcon from 'assets/icons/twitter.svg';
 import IconButton from './IconButton';
 
 const YellowBackground = styled.div`
-  background-color: ${({ theme }) => theme.primary};
+  background-color: ${({ theme }) => theme.note};
   display: grid;
   place-items: center;
   width: 500px;
   height: 500px;
 `;
 
-storiesOf('IconButton', module)
+storiesOf('Atoms/IconButton', module)
   .addDecorator(story => <YellowBackground>{story()}</YellowBackground>)
   .add('Bulb', () => <IconButton active icon={bulbIcon} />)
   .add('Logout', () => <IconButton icon={logoutIcon} />)
