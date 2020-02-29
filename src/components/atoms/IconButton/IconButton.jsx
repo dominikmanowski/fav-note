@@ -10,6 +10,9 @@ const IconButton = styled.button`
   background-position: 50% 50%;
   background-size: 50% 50%;
   border: none;
-  background-color: ${({ active }) => (active ? 'white' : 'transparent')};
+
+  &.active {
+    background-color: white;
+  }
 `;
 export default IconButton;

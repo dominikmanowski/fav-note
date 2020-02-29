@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    padding-left: 150px; 
     font-family: "Quicksand", sans-serif;
     font-size: 1.6rem;
     color: hsl(0, 0%, 15%);

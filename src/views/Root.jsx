@@ -6,8 +6,8 @@ import Articles from './Articles';
 import Twitters from './Twitters';
 
 const Root = () => (
-  <MainTemplate>
-    <Router>
+  <Router>
+    <MainTemplate>
       <Switch>
         <Route exact path="/" component={Notes} />
         <Route path="/articles" component={Articles} />
@@ -16,8 +16,8 @@ const Root = () => (
       <Link to="/">Notes</Link>
       <Link to="/articles">Articles</Link>
       <Link to="/twitters">Twitters</Link>
-    </Router>
-  </MainTemplate>
+    </MainTemplate>
+  </Router>
 );
 
 export default Root;
