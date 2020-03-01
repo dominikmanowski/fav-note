@@ -4,5 +4,5 @@ import Card from './Card';
 
 storiesOf('Molecules/Card', module)
   .add('Primary', () => <Card />)
-  .add('Secondary', () => <Card cardType="twitter" />)
-  .add('Tertiary', () => <Card cardType="article" />);
+  .add('Secondary', () => <Card cardType="twitters" />)
+  .add('Tertiary', () => <Card cardType="articles" />);
