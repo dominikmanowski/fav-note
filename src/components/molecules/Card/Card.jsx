@@ -65,25 +65,25 @@ const StyledLinkButton = styled.a`
   top: 50%;
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({
+  cardType,
+  title,
+  created,
+  twitterName,
+  articleUrl,
+  content,
+}) => (
   <StyledWrapper>
     <InnerWrapper activeColor={cardType}>
-      <StyledHeading>Hello World</StyledHeading>
-      <DateInfo>3 days</DateInfo>
+      <StyledHeading>{title}</StyledHeading>
+      <DateInfo>{created}</DateInfo>
       {cardType === 'twitter' && (
-        <StyledAvatar src="https://avatars.io/twitter/mowinik" />
+        <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
       )}
-      {cardType === 'article' && <StyledLinkButton href="https://google.com" />}
+      {cardType === 'article' && <StyledLinkButton href={articleUrl} />}
     </InnerWrapper>
     <InnerWrapper flex>
-      <Paragraph>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet a
-        neque provident tempore non optio itaque labore dolor suscipit voluptate
-        quis recusandae perferendis perspiciatis ipsa ut quasi beatae id amet,
-        sed voluptatem quod? Sequi velit officiis corrupti molestias ullam ipsum
-        laudantium, nisi in accusantium eaque excepturi, voluptate animi
-        incidunt ut?
-      </Paragraph>
+      <Paragraph>{content}</Paragraph>
       <Button secondary>Remove</Button>
     </InnerWrapper>
   </StyledWrapper>
@@ -91,10 +91,17 @@ const Card = ({ cardType }) => (
 
 Card.defaultProps = {
   cardType: 'note',
+  twitterName: null,
+  articleUrl: null,
 };
 
 Card.propTypes = {
   cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+  title: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleUrl: PropTypes.string,
+  content: PropTypes.string.isRequired,
 };
 
 export default Card;

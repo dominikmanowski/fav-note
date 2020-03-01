@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainTemplate from 'templates/MainTemplate';
 import Notes from './Notes';
 import Articles from './Articles';
@@ -13,9 +13,6 @@ const Root = () => (
         <Route path="/articles" component={Articles} />
         <Route path="/twitters" component={Twitters} />
       </Switch>
-      <Link to="/">Notes</Link>
-      <Link to="/articles">Articles</Link>
-      <Link to="/twitters">Twitters</Link>
     </MainTemplate>
   </Router>
 );
