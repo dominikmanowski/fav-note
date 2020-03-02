@@ -14,7 +14,7 @@ UserPageTemplate.defaultProps = {
 };
 
 UserPageTemplate.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOf([PropTypes.element, PropTypes.node]).isRequired,
   pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 

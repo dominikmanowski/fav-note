@@ -46,6 +46,7 @@ const Twitters = () => (
         content={content}
         created={created}
         key={id}
+        id={id}
         twitterName={twitterName}
       />
     ))}

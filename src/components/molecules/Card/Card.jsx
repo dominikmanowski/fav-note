@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import Paragraph from 'components/atoms/Paragraph';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
@@ -66,28 +67,37 @@ const StyledLinkButton = styled.a`
 `;
 
 const Card = ({
+  id,
   cardType,
   title,
   created,
   twitterName,
   articleUrl,
   content,
-}) => (
-  <StyledWrapper>
-    <InnerWrapper activeColor={cardType}>
-      <StyledHeading>{title}</StyledHeading>
-      <DateInfo>{created}</DateInfo>
-      {cardType === 'twitters' && (
-        <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
-      )}
-      {cardType === 'articles' && <StyledLinkButton href={articleUrl} />}
-    </InnerWrapper>
-    <InnerWrapper flex>
-      <Paragraph>{content}</Paragraph>
-      <Button secondary>Remove</Button>
-    </InnerWrapper>
-  </StyledWrapper>
-);
+}) => {
+  const [redirect, setRedirect] = useState(false);
+
+  const handleClick = () => setRedirect(true);
+
+  return redirect ? (
+    <Redirect to={`${cardType}/${id}`} />
+  ) : (
+    <StyledWrapper onClick={handleClick}>
+      <InnerWrapper activeColor={cardType}>
+        <StyledHeading>{title}</StyledHeading>
+        <DateInfo>{created}</DateInfo>
+        {cardType === 'twitters' && (
+          <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
+        )}
+        {cardType === 'articles' && <StyledLinkButton href={articleUrl} />}
+      </InnerWrapper>
+      <InnerWrapper flex>
+        <Paragraph>{content}</Paragraph>
+        <Button secondary>Remove</Button>
+      </InnerWrapper>
+    </StyledWrapper>
+  );
+};
 
 Card.defaultProps = {
   cardType: 'notes',
@@ -102,6 +112,7 @@ Card.propTypes = {
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Card;
