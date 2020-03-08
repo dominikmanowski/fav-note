@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Redirect } from 'react-router-dom';
@@ -8,6 +8,7 @@ import Paragraph from 'components/atoms/Paragraph';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import PageContext from 'context';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -70,7 +71,6 @@ const StyledLinkButton = styled.a`
 
 const Card = ({
   id,
-  cardType,
   title,
   created,
   twitterName,
@@ -79,24 +79,24 @@ const Card = ({
   removeItem,
 }) => {
   const [redirect, setRedirect] = useState(false);
-
+  const pageType = useContext(PageContext);
   const handleClick = () => setRedirect(true);
 
   return redirect ? (
-    <Redirect to={`${cardType}/${id}`} />
+    <Redirect to={`${pageType}/${id}`} />
   ) : (
     <StyledWrapper onClick={handleClick}>
-      <InnerWrapper activeColor={cardType}>
+      <InnerWrapper activeColor={pageType}>
         <StyledHeading>{title}</StyledHeading>
         <DateInfo>{created}</DateInfo>
-        {cardType === 'twitters' && (
+        {pageType === 'twitters' && (
           <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
         )}
-        {cardType === 'articles' && <StyledLinkButton href={articleUrl} />}
+        {pageType === 'articles' && <StyledLinkButton href={articleUrl} />}
       </InnerWrapper>
       <InnerWrapper flex>
         <Paragraph>{content}</Paragraph>
-        <Button secondary onClick={() => removeItem(cardType, id)}>
+        <Button secondary onClick={() => removeItem(pageType, id)}>
           Remove
         </Button>
       </InnerWrapper>
@@ -105,13 +105,11 @@ const Card = ({
 };
 
 Card.defaultProps = {
-  cardType: 'notes',
   twitterName: null,
   articleUrl: null,
 };
 
 Card.propTypes = {
-  cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,

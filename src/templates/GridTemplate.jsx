@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
+import PageContext from 'context';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
@@ -32,26 +33,24 @@ const StyledParagraph = styled(Paragraph)`
   font-size: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children, pageType }) => (
-  <UserPageTemplate pageType={pageType}>
-    <StyledWrapper>
-      <StyledPageHeader>
-        <Input search placeholder="Search" />
-        <StyledHeading big>{pageType}</StyledHeading>
-        <StyledParagraph>6 {pageType}</StyledParagraph>
-      </StyledPageHeader>
-      <StyledGrid>{children}</StyledGrid>
-    </StyledWrapper>
-  </UserPageTemplate>
-);
-
-GridTemplate.defaultProps = {
-  pageType: 'notes',
+const GridTemplate = ({ children }) => {
+  const pageType = useContext(PageContext);
+  return (
+    <UserPageTemplate>
+      <StyledWrapper>
+        <StyledPageHeader>
+          <Input search placeholder="Search" />
+          <StyledHeading big>{pageType}</StyledHeading>
+          <StyledParagraph>6 {pageType}</StyledParagraph>
+        </StyledPageHeader>
+        <StyledGrid>{children}</StyledGrid>
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
 };
 
 GridTemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
-  pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 export default GridTemplate;

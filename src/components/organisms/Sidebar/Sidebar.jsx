@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import IconButton from 'components/atoms/IconButton';
 import bulbIcon from 'assets/icons/bulb.svg';
@@ -8,6 +7,7 @@ import logoutIcon from 'assets/icons/logout.svg';
 import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import logoIcon from 'assets/icons/logo.svg';
+import PageContext from 'context';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -46,45 +46,40 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = ({ pageType }) => (
-  <StyledWrapper activeColor={pageType}>
-    <StyledLogoLink to="/" />
-    <StyledLinksList>
-      <li>
-        <IconButton
-          as={NavLink}
-          to="/notes"
-          icon={penIcon}
-          activeclass="active"
-        />
-      </li>
-      <li>
-        <IconButton
-          as={NavLink}
-          to="/twitters"
-          icon={twitterIcon}
-          activeclass="active"
-        />
-      </li>
-      <li>
-        <IconButton
-          as={NavLink}
-          to="/articles"
-          icon={bulbIcon}
-          activeclass="active"
-        />
-      </li>
-    </StyledLinksList>
-    <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
-  </StyledWrapper>
-);
-
-Sidebar.propTypes = {
-  pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
-};
-
-Sidebar.defaultProps = {
-  pageType: 'notes',
+const Sidebar = () => {
+  const pageType = useContext(PageContext);
+  return (
+    <StyledWrapper activeColor={pageType}>
+      <StyledLogoLink to="/" />
+      <StyledLinksList>
+        <li>
+          <IconButton
+            as={NavLink}
+            to="/notes"
+            icon={penIcon}
+            activeclass="active"
+          />
+        </li>
+        <li>
+          <IconButton
+            as={NavLink}
+            to="/twitters"
+            icon={twitterIcon}
+            activeclass="active"
+          />
+        </li>
+        <li>
+          <IconButton
+            as={NavLink}
+            to="/articles"
+            icon={bulbIcon}
+            activeclass="active"
+          />
+        </li>
+      </StyledLinksList>
+      <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+    </StyledWrapper>
+  );
 };
 
 export default Sidebar;

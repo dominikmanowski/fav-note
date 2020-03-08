@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,6 +6,7 @@ import UserPageTemplate from 'templates/UserPageTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
+import PageContext from 'context';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -51,37 +52,39 @@ const StyledImage = styled.img`
 `;
 
 const DetailsTemplate = ({
-  pageType,
   title,
   created,
   content,
   articleUrl,
   twitterName,
-}) => (
-  <UserPageTemplate pageType={pageType}>
-    <StyledWrapper>
-      <StyledPageHeader>
-        <StyledHeading big as="h1">
-          {title}
-        </StyledHeading>
-        <StyledParagraph>{created}</StyledParagraph>
-      </StyledPageHeader>
-      <Paragraph>{content}</Paragraph>
-      {pageType === 'articles' && (
-        <StyledLink href={articleUrl}>Open article</StyledLink>
-      )}
-      {pageType === 'twitters' && (
-        <StyledImage
-          alt={title}
-          src={`https://avatars.io/twitter/${twitterName}`}
-        />
-      )}
-      <Button as={Link} to={`/${pageType}`} activeColor={pageType}>
-        save / close
-      </Button>
-    </StyledWrapper>
-  </UserPageTemplate>
-);
+}) => {
+  const pageType = useContext(PageContext);
+  return (
+    <UserPageTemplate pageType={pageType}>
+      <StyledWrapper>
+        <StyledPageHeader>
+          <StyledHeading big as="h1">
+            {title}
+          </StyledHeading>
+          <StyledParagraph>{created}</StyledParagraph>
+        </StyledPageHeader>
+        <Paragraph>{content}</Paragraph>
+        {pageType === 'articles' && (
+          <StyledLink href={articleUrl}>Open article</StyledLink>
+        )}
+        {pageType === 'twitters' && (
+          <StyledImage
+            alt={title}
+            src={`https://avatars.io/twitter/${twitterName}`}
+          />
+        )}
+        <Button as={Link} to={`/${pageType}`} activeColor={pageType}>
+          save / close
+        </Button>
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
+};
 
 DetailsTemplate.defaultProps = {
   title: '',
@@ -92,7 +95,6 @@ DetailsTemplate.defaultProps = {
 };
 
 DetailsTemplate.propTypes = {
-  pageType: PropTypes.string.isRequired,
   title: PropTypes.string,
   created: PropTypes.string,
   content: PropTypes.string,
